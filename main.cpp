@@ -19,6 +19,7 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite);
 HWND CreateListView(HWND hwndParent);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -131,6 +132,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         hwndList = CreateListView(hWnd);
+        CreateColumn(hwndList, 0, (wchar_t*)L"first", 100);
+        CreateColumn(hwndList, 1, (wchar_t*)L"second", 200);
+        CreateColumn(hwndList, 2, (wchar_t*)L"third", 300);
         break;
     case WM_COMMAND:
         {
@@ -184,6 +188,18 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite)
+{
+    LVCOLUMN lvc;
+
+    lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+    lvc.fmt = LVCFMT_LEFT;
+    lvc.cx = iBreite;
+    lvc.pszText = (LPWSTR)Text;
+    lvc.iSubItem = iCol;
+    return ListView_InsertColumn(hwndLV, iCol, &lvc);
 }
 
 HWND CreateListView(HWND hwndParent)
