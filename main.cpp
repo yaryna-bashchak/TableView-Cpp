@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "main.h"
+#include <commctrl.h>
 
 #define MAX_LOADSTRING 100
 
@@ -10,12 +11,15 @@
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+HWND hwndList;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+HWND CreateListView(HWND hwndParent);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -125,6 +129,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        hwndList = CreateListView(hWnd);
+        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -177,4 +184,29 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+HWND CreateListView(HWND hwndParent)
+{
+    INITCOMMONCONTROLSEX icex;           // Structure for control initialization.
+    icex.dwICC = ICC_LISTVIEW_CLASSES;
+    //InitCommonControlsEx(&icex);
+
+    RECT rcClient;                       // The parent window's client area.
+
+    GetClientRect(hwndParent, &rcClient);
+
+    // Create the list-view window in report view with label editing enabled.
+    HWND hWndListView = CreateWindow(WC_LISTVIEW,
+        L"test",
+        WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_EDITLABELS | LVS_SORTASCENDING,
+        0, 0,
+        rcClient.right - rcClient.left,
+        rcClient.bottom - rcClient.top,
+        hwndParent,
+        (HMENU)IDC_MAIN,
+        hInst,
+        NULL);
+
+    return (hWndListView);
 }
