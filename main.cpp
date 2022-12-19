@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "main.h"
 #include <commctrl.h>
+#pragma comment(lib, "comctl32.lib")
 
 #define MAX_LOADSTRING 100
 
@@ -33,6 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+    InitCommonControls();
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -141,7 +143,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         CreateColumn(hwndList, 2, (wchar_t*)L"third", 300);
         CreateItem(hwndList, (wchar_t*)L"abc");
         Create2ColItem(hwndList, (wchar_t*)L"b", (wchar_t*)L"name", (wchar_t*)L"coords");
-        CreateItem(hwndList, (wchar_t*)L"aabc");
+        CreateItem(hwndList, (wchar_t*)L"aa\tb\tc");
         Create2ColItem(hwndList, (wchar_t*)L"c", (wchar_t*)L"name", (wchar_t*)L"coords");
         break;
     case WM_COMMAND:
@@ -239,7 +241,7 @@ HWND CreateListView(HWND hwndParent)
 {
     INITCOMMONCONTROLSEX icex;           // Structure for control initialization.
     icex.dwICC = ICC_LISTVIEW_CLASSES;
-    //InitCommonControlsEx(&icex);
+    InitCommonControlsEx(&icex);
 
     RECT rcClient;                       // The parent window's client area.
 
