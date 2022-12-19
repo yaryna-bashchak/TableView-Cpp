@@ -3,8 +3,7 @@
 
 #include "framework.h"
 #include "main.h"
-#include <commctrl.h>
-#pragma comment(lib, "comctl32.lib")
+#include "TableView.h"
 
 #define MAX_LOADSTRING 100
 
@@ -12,7 +11,9 @@
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+
 HWND hwndList;
+TableViewClass Table;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
