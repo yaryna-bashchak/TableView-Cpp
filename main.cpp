@@ -21,10 +21,10 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite);
-int CreateItem(HWND hwndList, wchar_t* Text);
-int Create2ColItem(HWND hwndList, wchar_t* Text1, wchar_t* Text2, wchar_t* Text3);
-HWND CreateListView(HWND hwndParent);
+//int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite);
+//int CreateItem(HWND hwndList, wchar_t* Text);
+//int Create2ColItem(HWND hwndList, wchar_t* Text1, wchar_t* Text2, wchar_t* Text3);
+//HWND CreateListView(HWND hwndParent);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -143,14 +143,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_CREATE:
-        hwndList = CreateListView(hWnd);
+        Table.OnCreate(hWnd, hInst);
+        Table.AddColumn(0, (wchar_t*)L"first", 100);
+        Table.AddColumn(1, (wchar_t*)L"second", 200);
+        Table.AddColumn(2, (wchar_t*)L"third", 300);
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        /*hwndList = CreateListView(hWnd);
         CreateColumn(hwndList, 0, (wchar_t*)L"first", 100);
         CreateColumn(hwndList, 1, (wchar_t*)L"second", 200);
         CreateColumn(hwndList, 2, (wchar_t*)L"third", 300);
         CreateItem(hwndList, (wchar_t*)L"abc");
         Create2ColItem(hwndList, (wchar_t*)L"b", (wchar_t*)L"name", (wchar_t*)L"coords");
         CreateItem(hwndList, (wchar_t*)L"aa\tb\tc");
-        Create2ColItem(hwndList, (wchar_t*)L"c", (wchar_t*)L"name", (wchar_t*)L"coords");
+        Create2ColItem(hwndList, (wchar_t*)L"c", (wchar_t*)L"name", (wchar_t*)L"coords");*/
         break;
     case WM_COMMAND:
         {
@@ -206,64 +211,39 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
-int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite)
-{
-    LVCOLUMN lvc;
+//int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite)
+//{
+//    LVCOLUMN lvc;
+//
+//    lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+//    lvc.fmt = LVCFMT_LEFT;
+//    lvc.cx = iBreite;
+//    lvc.pszText = (LPWSTR)Text;
+//    lvc.iSubItem = iCol;
+//    return ListView_InsertColumn(hwndLV, iCol, &lvc);
+//}
 
-    lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
-    lvc.fmt = LVCFMT_LEFT;
-    lvc.cx = iBreite;
-    lvc.pszText = (LPWSTR)Text;
-    lvc.iSubItem = iCol;
-    return ListView_InsertColumn(hwndLV, iCol, &lvc);
-}
-
-int CreateItem(HWND hwndList, wchar_t* Text)
-{
-    LVITEM lvi = { 0 };
-
-    lvi.mask = LVIF_TEXT;
-    lvi.pszText = Text;
-    return ListView_InsertItem(hwndList, &lvi);
-}
-
-int Create2ColItem(HWND hwndList, wchar_t* Text1, wchar_t* Text2, wchar_t* Text3)
-{
-    LVITEM lvi = { 0 };
-    int Ret;
-
-    // Ініціалізація членів LVITEM, які є спільними для всіх елементів. 
-    lvi.mask = LVIF_TEXT;
-    lvi.pszText = Text1;
-    Ret = ListView_InsertItem(hwndList, &lvi);
-    if (Ret >= 0) {
-        ListView_SetItemText(hwndList, Ret, 1, Text2);
-        ListView_SetItemText(hwndList, Ret, 2, Text3);
-    }
-    return Ret;
-}
-
-HWND CreateListView(HWND hwndParent)
-{
-    INITCOMMONCONTROLSEX icex;           // Structure for control initialization.
-    icex.dwICC = ICC_LISTVIEW_CLASSES;
-    InitCommonControlsEx(&icex);
-
-    RECT rcClient;                       // The parent window's client area.
-
-    GetClientRect(hwndParent, &rcClient);
-
-    // Create the list-view window in report view with label editing enabled.
-    HWND hWndListView = CreateWindow(WC_LISTVIEW,
-        L"test",
-        WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_EDITLABELS | LVS_SORTASCENDING,
-        0, 0,
-        rcClient.right - rcClient.left,
-        rcClient.bottom - rcClient.top,
-        hwndParent,
-        (HMENU)IDC_LISTVIEW,
-        hInst,
-        NULL);
-
-    return (hWndListView);
-}
+//int CreateItem(HWND hwndList, wchar_t* Text)
+//{
+//    LVITEM lvi = { 0 };
+//
+//    lvi.mask = LVIF_TEXT;
+//    lvi.pszText = Text;
+//    return ListView_InsertItem(hwndList, &lvi);
+//}
+//
+//int Create2ColItem(HWND hwndList, wchar_t* Text1, wchar_t* Text2, wchar_t* Text3)
+//{
+//    LVITEM lvi = { 0 };
+//    int Ret;
+//
+//    // Ініціалізація членів LVITEM, які є спільними для всіх елементів. 
+//    lvi.mask = LVIF_TEXT;
+//    lvi.pszText = Text1;
+//    Ret = ListView_InsertItem(hwndList, &lvi);
+//    if (Ret >= 0) {
+//        ListView_SetItemText(hwndList, Ret, 1, Text2);
+//        ListView_SetItemText(hwndList, Ret, 2, Text3);
+//    }
+//    return Ret;
+//}
