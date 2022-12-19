@@ -111,6 +111,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        300, 100, 800, 600,
        nullptr, nullptr, hInstance, nullptr);
 
+   /*HWND hWnd = CreateWindow(WC_LISTVIEW, szTitle,
+       WS_VISIBLE | WS_BORDER | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
+       10, 10, 300, 100,
+       nullptr, (HMENU)IDC_MAIN, hInst, 0);*/
+
    if (!hWnd)
    {
       return FALSE;
@@ -255,7 +260,7 @@ HWND CreateListView(HWND hwndParent)
         rcClient.right - rcClient.left,
         rcClient.bottom - rcClient.top,
         hwndParent,
-        (HMENU)IDC_MAIN,
+        (HMENU)IDC_LISTVIEW,
         hInst,
         NULL);
 
