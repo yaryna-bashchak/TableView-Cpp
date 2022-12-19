@@ -21,6 +21,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int CreateColumn(HWND hwndLV, int iCol, wchar_t* Text, int iBreite);
 int CreateItem(HWND hwndList, wchar_t* Text);
+int Create2ColItem(HWND hwndList, wchar_t* Text1, wchar_t* Text2, wchar_t* Text3);
 HWND CreateListView(HWND hwndParent);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -137,7 +138,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         CreateColumn(hwndList, 1, (wchar_t*)L"second", 200);
         CreateColumn(hwndList, 2, (wchar_t*)L"third", 300);
         CreateItem(hwndList, (wchar_t*)L"abc");
+        Create2ColItem(hwndList, (wchar_t*)L"b", (wchar_t*)L"name", (wchar_t*)L"coords");
         CreateItem(hwndList, (wchar_t*)L"aabc");
+        Create2ColItem(hwndList, (wchar_t*)L"c", (wchar_t*)L"name", (wchar_t*)L"coords");
         break;
     case WM_COMMAND:
         {
@@ -212,6 +215,22 @@ int CreateItem(HWND hwndList, wchar_t* Text)
     lvi.mask = LVIF_TEXT;
     lvi.pszText = Text;
     return ListView_InsertItem(hwndList, &lvi);
+}
+
+int Create2ColItem(HWND hwndList, wchar_t* Text1, wchar_t* Text2, wchar_t* Text3)
+{
+    LVITEM lvi = { 0 };
+    int Ret;
+
+    // Ініціалізація членів LVITEM, які є спільними для всіх елементів. 
+    lvi.mask = LVIF_TEXT;
+    lvi.pszText = Text1;
+    Ret = ListView_InsertItem(hwndList, &lvi);
+    if (Ret >= 0) {
+        ListView_SetItemText(hwndList, Ret, 1, Text2);
+        ListView_SetItemText(hwndList, Ret, 2, Text3);
+    }
+    return Ret;
 }
 
 HWND CreateListView(HWND hwndParent)
