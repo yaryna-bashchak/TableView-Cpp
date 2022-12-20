@@ -15,6 +15,7 @@ private:
 	HWND hWndParent;
 	HWND hWndTable;
 	vector<vector<wstring>> table;
+	vector<vector<wstring>> currentTable;
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
 	void ReadFromFile();

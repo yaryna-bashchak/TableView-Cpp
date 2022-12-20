@@ -14,7 +14,7 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 
     hWndTable = CreateWindow(WC_LISTVIEW,
         L"table",
-        WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_EDITLABELS | LVS_SORTASCENDING,
+        WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
         0, 0,
         rcClient.right - rcClient.left,
         rcClient.bottom - rcClient.top,
@@ -38,7 +38,8 @@ void TableViewClass::ReadFromFile()
         table.push_back(row);
     }
 
-    PrintTable(table);
+    currentTable = table;
+    PrintTable(currentTable);
 }
 
 
