@@ -1,4 +1,6 @@
 #include "TableView.h"
+#include <fstream>
+#include <codecvt>
 
 void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 {
@@ -42,6 +44,26 @@ void TableViewClass::ReadFromFile()
     PrintTable(currentTable);
 }
 
+void TableViewClass::WriteToFile()
+{
+    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
+
+    fstream file;
+    file.open("Table.txt");
+    for (size_t i = 0; i < currentTable.size(); i++)
+    {
+        //auto str = line.c_str();
+        WCHAR line[256];
+        vector<wstring> row = currentTable[i];
+
+        swprintf_s(line, 256, L"%s", row[0].c_str());
+        for (int j = 1; j < currentTable[i].size(); j++)
+            swprintf_s(line, 256, L"%s\t%s", line, row[i].c_str());
+
+        file << convert.to_bytes(line) << endl;
+    }
+    file.close();
+}
 
 void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
 {
