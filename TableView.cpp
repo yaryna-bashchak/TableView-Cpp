@@ -22,6 +22,22 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
         (HMENU)IDC_LISTVIEW,
         hInst,
         NULL);
+
+    ReadFromFile();
+}
+
+void TableViewClass::ReadFromFile()
+{
+    // vector to test
+    for (size_t r = 0; r < 3; r++)
+    {
+        vector<string> row;
+        for (size_t c = 0; c < 4; c++)
+        {
+            row.push_back("1");
+        }
+        table.push_back(row);
+    }
 }
 
 void TableViewClass::OnSize()
