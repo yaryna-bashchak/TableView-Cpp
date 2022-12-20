@@ -42,6 +42,23 @@ void TableViewClass::ReadFromFile()
         {
             string line;
             getline(file, line);
+            if (line != "")
+            {
+                vector<wstring> row;
+                string cell;
+                size_t pos = 0;
+                string d = "\t";
+
+                while ((pos = line.find(d)) != string::npos)
+                {
+                    cell = line.substr(0, pos);
+                    line.erase(0, pos + d.length());
+                    row.push_back(convert.from_bytes(cell));
+                }
+                row.push_back(convert.from_bytes(line));
+
+                table.push_back(row);
+            }
         }
         file.close();
     }
