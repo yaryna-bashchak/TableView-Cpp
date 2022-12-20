@@ -29,6 +29,8 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 void TableViewClass::ReadFromFile()
 {
     // vector to test
+    table = {};
+    ListView_DeleteAllItems(hWndTable);
 
     for (size_t r = 0; r < 3; r++)
     {
