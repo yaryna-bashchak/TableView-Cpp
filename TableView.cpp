@@ -24,6 +24,16 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
         NULL);
 }
 
+void TableViewClass::OnSize()
+{
+    RECT rc;
+    if (hWndTable)
+    {
+        GetClientRect(hWndParent, &rc);
+        MoveWindow(hWndTable, 0, 0, rc.right - rc.left, rc.bottom - rc.top, FALSE);
+    }
+}
+
 int TableViewClass::AddColumn(int iColumn, wchar_t* text, int width)
 {
     LVCOLUMN lvc;

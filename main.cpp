@@ -148,6 +148,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Table.AddColumn(1, (wchar_t*)L"second", 200);
         Table.AddColumn(2, (wchar_t*)L"third", 300);
         Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
         /*hwndList = CreateListView(hWnd);
         CreateColumn(hwndList, 0, (wchar_t*)L"first", 100);
         CreateColumn(hwndList, 1, (wchar_t*)L"second", 200);
@@ -156,6 +169,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Create2ColItem(hwndList, (wchar_t*)L"b", (wchar_t*)L"name", (wchar_t*)L"coords");
         CreateItem(hwndList, (wchar_t*)L"aa\tb\tc");
         Create2ColItem(hwndList, (wchar_t*)L"c", (wchar_t*)L"name", (wchar_t*)L"coords");*/
+        break;
+    case WM_SIZE:
+        Table.OnSize();
         break;
     case WM_COMMAND:
         {
