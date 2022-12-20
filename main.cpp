@@ -134,18 +134,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         Table.OnCreate(hWnd, hInst);
-        Table.AddColumn(0, (wchar_t*)L"first", 100);
-        Table.AddColumn(1, (wchar_t*)L"second", 200);
-        Table.AddColumn(2, (wchar_t*)L"third", 300);
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
-        Table.AddRow((wchar_t*)L"first", (wchar_t*)L"second", (wchar_t*)L"third");
+        Table.ReadFromFile();
         break;
     case WM_SIZE:
         Table.OnSize();

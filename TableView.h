@@ -14,11 +14,13 @@ class TableViewClass
 private:
 	HWND hWndParent;
 	HWND hWndTable;
-	vector<vector<string>> table{};
+	vector<vector<wstring>> table;
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
 	void ReadFromFile();
+	void PrintTable(vector<vector<wstring>> CurrentTable);
+	void PrintHeadings(vector<wstring> headings);
+	void PrintRow(vector<wstring> row);
 	void OnSize();
-	int AddColumn(int iColumn, wchar_t* text, int width);
-	int AddRow(wchar_t* Text1, wchar_t* Text2, wchar_t* Text3);
+	void SortColumn(LPARAM lParam);
 };
