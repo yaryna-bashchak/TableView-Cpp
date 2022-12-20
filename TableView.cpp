@@ -28,18 +28,22 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 
 void TableViewClass::ReadFromFile()
 {
-    // vector to test
     table = {};
     ListView_DeleteAllItems(hWndTable);
 
-    for (size_t r = 0; r < 3; r++)
+    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
+
+    ifstream file;
+    file.open("Table.txt");
+    
+    if (file.is_open())
     {
-        vector<wstring> row;
-        for (size_t c = 0; c < 4; c++)
+        while (file)
         {
-            row.push_back(L"hello");
+            string line;
+            getline(file, line);
         }
-        table.push_back(row);
+        file.close();
     }
 
     currentTable = table;
@@ -87,7 +91,7 @@ void TableViewClass::PrintHeadings(vector<wstring> headings)
         lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
         lvc.fmt = LVCFMT_LEFT;
         lvc.cx = width;
-        lvc.pszText = (LPWSTR)headings[0].c_str();
+        lvc.pszText = (LPWSTR)headings[i].c_str();
         lvc.iSubItem = i;
         ListView_InsertColumn(hWndTable, i, &lvc);
     }
