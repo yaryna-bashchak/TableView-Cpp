@@ -44,7 +44,7 @@ void TableViewClass::ReadFromFile()
     PrintTable(currentTable);
 }
 
-void TableViewClass::WriteToFile()
+void TableViewClass::WriteInFile()
 {
     wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
 

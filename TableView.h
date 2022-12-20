@@ -19,7 +19,7 @@ private:
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
 	void ReadFromFile();
-	void WriteToFile();
+	void WriteInFile();
 	void PrintTable(vector<vector<wstring>> CurrentTable);
 	void PrintHeadings(vector<wstring> headings);
 	void PrintRow(vector<wstring> row);
