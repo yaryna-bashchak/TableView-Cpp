@@ -134,7 +134,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         Table.OnCreate(hWnd, hInst);
-        Table.ReadFromFile();
         break;
     case WM_SIZE:
         Table.OnSize();
@@ -145,6 +144,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // Parse the menu selections:
             switch (wmId)
             {
+            case ID_OPEN:
+                Table.ReadFromFile();
+                break;
+            case ID_SAVE:
+                Table.WriteInFile();
+                break;
+            case ID_SAVE_AS:
+                Table.WriteInFile();
+                break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;
