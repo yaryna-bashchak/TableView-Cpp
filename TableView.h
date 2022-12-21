@@ -22,7 +22,7 @@ public:
 	void WriteInFile();
 	void PrintTable(vector<vector<wstring>> CurrentTable);
 	void PrintHeadings(vector<wstring> headings);
-	void PrintRow(vector<wstring> row);
+	void PrintRow(vector<wstring> row, size_t index);
 	void OnSize();
 	void SortColumn(LPARAM lParam);
 };

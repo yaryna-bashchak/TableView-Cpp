@@ -93,7 +93,7 @@ void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
     PrintHeadings(CurrentTable[0]);
     for (size_t i = 1; i < CurrentTable.size(); i++)
     {
-        PrintRow(CurrentTable[i]);
+        PrintRow(CurrentTable[i], i - 1);
     }
 }
 
@@ -114,13 +114,14 @@ void TableViewClass::PrintHeadings(vector<wstring> headings)
     }
 }
 
-void TableViewClass::PrintRow(vector<wstring> row)
+void TableViewClass::PrintRow(vector<wstring> row, size_t index)
 {
     LVITEM lvi = { 0 };
     int Ret;
 
     lvi.mask = LVIF_TEXT;
     lvi.pszText = (LPWSTR)row[0].c_str();
+    lvi.iItem = index;
     Ret = ListView_InsertItem(hWndTable, &lvi);
     if (Ret >= 0) {
         for (size_t i = 1; i < row.size(); i++)
