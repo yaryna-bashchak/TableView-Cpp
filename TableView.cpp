@@ -1,4 +1,4 @@
-#include "TableView.h"
+﻿#include "TableView.h"
 #include <fstream>
 #include <codecvt>
 #include <algorithm>
@@ -52,7 +52,7 @@ void TableViewClass::ReadFromFile()
                 string d = "\t";
 
                 if (i != 0) row.push_back(to_wstring(i));
-                else row.push_back(L"�");
+                else row.push_back(L"№");
 
                 while ((pos = line.find(d)) != string::npos)
                 {
@@ -76,6 +76,7 @@ void TableViewClass::ReadFromFile()
 void TableViewClass::WriteInFile()
 {
     wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
+    currentTable[0] = table[0];
 
     fstream file;
     file.open("Table.txt");
@@ -152,6 +153,7 @@ void TableViewClass::DeleteFullTable()
 void TableViewClass::SortColumn(int iColumn)
 {
     // changing data of lastSortedColumnAndType
+
     if (lastSortedColumnAndType.first == iColumn)
     {
         lastSortedColumnAndType.second = (lastSortedColumnAndType.second + 1) % 3;
@@ -163,6 +165,7 @@ void TableViewClass::SortColumn(int iColumn)
     }
     
     // sorting
+
     if (lastSortedColumnAndType.second == 0 || lastSortedColumnAndType.first == 0)
     {
         currentTable = table;
@@ -179,7 +182,16 @@ void TableViewClass::SortColumn(int iColumn)
                     return a[iColumn] > b[iColumn];
             });
 
+    // add symbol (↗️ or ↘️) about sort type
+
+    currentTable[0] = table[0];
+    wstring sortType = L"";
+    if (lastSortedColumnAndType.second == 1) sortType = L"↗️";
+    else if (lastSortedColumnAndType.second == 2) sortType = L"↘️";
+    currentTable[0][lastSortedColumnAndType.first] += sortType;
+
     // printing new current table
+
     PrintTable(currentTable);
 }
 
