@@ -97,7 +97,8 @@ void TableViewClass::WriteInFile()
 
 void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
 {
-    ListView_DeleteAllItems(hWndTable);
+    DeleteFullTable();
+
     PrintHeadings(CurrentTable[0]);
     for (size_t i = 1; i < CurrentTable.size(); i++)
     {
@@ -137,6 +138,15 @@ void TableViewClass::PrintRow(vector<wstring> row, size_t index)
             ListView_SetItemText(hWndTable, Ret, i, (LPWSTR)row[i].c_str());
         }
     }
+}
+
+void TableViewClass::DeleteFullTable()
+{
+    for (size_t i = currentTable.size(); i > 0; i--)
+    {
+        ListView_DeleteColumn(hWndTable, i - 1);
+    }
+    ListView_DeleteAllItems(hWndTable);
 }
 
 void TableViewClass::SortColumn(int iColumn)

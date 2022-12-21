@@ -23,6 +23,7 @@ public:
 	void PrintTable(vector<vector<wstring>> CurrentTable);
 	void PrintHeadings(vector<wstring> headings);
 	void PrintRow(vector<wstring> row, size_t index);
+	void DeleteFullTable();
 	void OnSize();
 	void SortColumn(LPARAM lParam);
 };
