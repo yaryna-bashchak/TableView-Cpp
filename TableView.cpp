@@ -1,6 +1,7 @@
 #include "TableView.h"
 #include <fstream>
 #include <codecvt>
+#include <algorithm>
 
 void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 {
@@ -16,7 +17,7 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 
     hWndTable = CreateWindow(WC_LISTVIEW,
         L"table",
-        WS_VISIBLE | WS_CHILD | LVS_REPORT | LVS_EDITLABELS,
+        WS_VISIBLE | WS_CHILD | LVS_REPORT,
         0, 0,
         rcClient.right - rcClient.left,
         rcClient.bottom - rcClient.top,
@@ -29,7 +30,6 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 void TableViewClass::ReadFromFile()
 {
     table.clear();
-    ListView_DeleteAllItems(hWndTable);
 
     wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
 
@@ -97,6 +97,7 @@ void TableViewClass::WriteInFile()
 
 void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
 {
+    ListView_DeleteAllItems(hWndTable);
     PrintHeadings(CurrentTable[0]);
     for (size_t i = 1; i < CurrentTable.size(); i++)
     {
@@ -106,7 +107,7 @@ void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
 
 void TableViewClass::PrintHeadings(vector<wstring> headings)
 {
-    int width = 200;
+    int width = 100;
 
     for (size_t i = 0; i < headings.size(); i++)
     {
@@ -138,9 +139,14 @@ void TableViewClass::PrintRow(vector<wstring> row, size_t index)
     }
 }
 
-void TableViewClass::SortColumn(LPARAM lParam)
+void TableViewClass::SortColumn(int iColumn)
 {
-    
+    sort(currentTable.begin() + 1, currentTable.end(),
+        [iColumn](const vector<wstring>& a, const vector<wstring>& b)
+        {
+            return a[iColumn] < b[iColumn];
+        });
+    PrintTable(currentTable);
 }
 
 void TableViewClass::OnSize()

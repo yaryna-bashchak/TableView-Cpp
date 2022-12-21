@@ -138,6 +138,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
         Table.OnSize();
         break;
+    case WM_NOTIFY:
+        switch (((LPNMHDR)lParam)->code) {
+        case LVN_COLUMNCLICK:
+            Table.SortColumn(((LPNMLISTVIEW)lParam)->iSubItem);
+            break;
+        }
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
