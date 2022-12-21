@@ -28,7 +28,7 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
 
 void TableViewClass::ReadFromFile()
 {
-    table = {};
+    table.clear();
     ListView_DeleteAllItems(hWndTable);
 
     wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
@@ -52,7 +52,7 @@ void TableViewClass::ReadFromFile()
                 string d = "\t";
 
                 if (i != 0) row.push_back(to_wstring(i));
-                else row.push_back(L"");
+                else row.push_back(L"¹");
 
                 while ((pos = line.find(d)) != string::npos)
                 {
@@ -81,13 +81,14 @@ void TableViewClass::WriteInFile()
     file.open("Table.txt");
     for (size_t i = 0; i < currentTable.size(); i++)
     {
-        //auto str = line.c_str();
         WCHAR line[256];
         vector<wstring> row = currentTable[i];
 
+        row.erase(row.cbegin());
+
         swprintf_s(line, 256, L"%s", row[0].c_str());
-        for (int j = 1; j < currentTable[i].size(); j++)
-            swprintf_s(line, 256, L"%s\t%s", line, row[i].c_str());
+        for (int j = 1; j < row.size(); j++)
+            swprintf_s(line, 256, L"%s\t%s", line, row[j].c_str());
 
         file << convert.to_bytes(line) << endl;
     }
