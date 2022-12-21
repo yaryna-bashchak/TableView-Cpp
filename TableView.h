@@ -3,6 +3,7 @@
 #include "Resource.h"
 #include <vector>
 #include <string>
+#include <utility>
 
 #include <commctrl.h>
 #pragma comment(lib, "comctl32.lib")
@@ -14,6 +15,7 @@ class TableViewClass
 private:
 	HWND hWndParent;
 	HWND hWndTable;
+	pair<int, int> lastSortedColumnAndType = make_pair(0, 1);
 	vector<vector<wstring>> table;
 	vector<vector<wstring>> currentTable;
 public:
@@ -25,5 +27,5 @@ public:
 	void PrintRow(vector<wstring> row, size_t index);
 	void DeleteFullTable();
 	void OnSize();
-	void SortColumn(LPARAM lParam);
+	void SortColumn(int iColumn);
 };

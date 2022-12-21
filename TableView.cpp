@@ -151,11 +151,35 @@ void TableViewClass::DeleteFullTable()
 
 void TableViewClass::SortColumn(int iColumn)
 {
-    sort(currentTable.begin() + 1, currentTable.end(),
-        [iColumn](const vector<wstring>& a, const vector<wstring>& b)
-        {
-            return a[iColumn] < b[iColumn];
-        });
+    // changing data of lastSortedColumnAndType
+    if (lastSortedColumnAndType.first == iColumn)
+    {
+        lastSortedColumnAndType.second = (lastSortedColumnAndType.second + 1) % 3;
+        if (lastSortedColumnAndType.second == 0) lastSortedColumnAndType = make_pair(0, 1);
+    }
+    else
+    {
+        lastSortedColumnAndType = make_pair(iColumn, 1);
+    }
+    
+    // sorting
+    if (lastSortedColumnAndType.second == 0 || lastSortedColumnAndType.first == 0)
+    {
+        currentTable = table;
+        if (lastSortedColumnAndType.second == 2)
+            reverse(currentTable.begin() + 1, currentTable.end());
+    }
+    else
+        sort(currentTable.begin() + 1, currentTable.end(),
+            [&](const vector<wstring>& a, const vector<wstring>& b)
+            {
+                if (lastSortedColumnAndType.second == 1)
+                    return a[iColumn] < b[iColumn];
+                else
+                    return a[iColumn] > b[iColumn];
+            });
+
+    // printing new current table
     PrintTable(currentTable);
 }
 
