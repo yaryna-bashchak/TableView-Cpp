@@ -38,16 +38,21 @@ void TableViewClass::ReadFromFile()
     
     if (file.is_open())
     {
+        int i = 0;
         while (file)
         {
-            string line;
+            string line;  
             getline(file, line);
+
             if (line != "")
             {
                 vector<wstring> row;
                 string cell;
                 size_t pos = 0;
                 string d = "\t";
+
+                if (i != 0) row.push_back(to_wstring(i));
+                else row.push_back(L"");
 
                 while ((pos = line.find(d)) != string::npos)
                 {
@@ -58,6 +63,7 @@ void TableViewClass::ReadFromFile()
                 row.push_back(convert.from_bytes(line));
 
                 table.push_back(row);
+                i++;
             }
         }
         file.close();
