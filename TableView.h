@@ -3,6 +3,7 @@
 #include "Resource.h"
 #include <vector>
 #include <string>
+#include "commdlg.h"
 #include <utility>
 
 #include <commctrl.h>
@@ -20,7 +21,7 @@ private:
 	vector<vector<wstring>> currentTable;
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
-	void ReadFromFile();
+	void ReadFromFile(wstring fileName);
 	void WriteInFile();
 	void PrintTable(vector<vector<wstring>> CurrentTable);
 	void PrintHeadings(vector<wstring> headings);

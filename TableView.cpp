@@ -27,50 +27,53 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
         NULL);
 }
 
-void TableViewClass::ReadFromFile()
+void TableViewClass::ReadFromFile(wstring fileName)
 {
-    table.clear();
-
-    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
-
-    ifstream file;
-    file.open("Table.txt");
-    
-    if (file.is_open())
+    if (fileName != L"")
     {
-        int i = 0;
-        while (file)
+        table.clear();
+
+        wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
+
+        ifstream file;
+        file.open(fileName);
+    
+        if (file.is_open())
         {
-            string line;  
-            getline(file, line);
-
-            if (line != "")
+            int i = 0;
+            while (file)
             {
-                vector<wstring> row;
-                string cell;
-                size_t pos = 0;
-                string d = "\t";
+                string line;  
+                getline(file, line);
 
-                if (i != 0) row.push_back(to_wstring(i));
-                else row.push_back(L"№");
-
-                while ((pos = line.find(d)) != string::npos)
+                if (line != "")
                 {
-                    cell = line.substr(0, pos);
-                    line.erase(0, pos + d.length());
-                    row.push_back(convert.from_bytes(cell));
+                    vector<wstring> row;
+                    string cell;
+                    size_t pos = 0;
+                    string d = "\t";
+
+                    if (i != 0) row.push_back(to_wstring(i));
+                    else row.push_back(L"№");
+
+                    while ((pos = line.find(d)) != string::npos)
+                    {
+                        cell = line.substr(0, pos);
+                        line.erase(0, pos + d.length());
+                        row.push_back(convert.from_bytes(cell));
+                    }
+                    row.push_back(convert.from_bytes(line));
+
+                    table.push_back(row);
+                    i++;
                 }
-                row.push_back(convert.from_bytes(line));
-
-                table.push_back(row);
-                i++;
             }
+            file.close();
         }
-        file.close();
-    }
 
-    currentTable = table;
-    PrintTable(currentTable);
+        currentTable = table;
+        PrintTable(currentTable);
+    }
 }
 
 void TableViewClass::WriteInFile()
