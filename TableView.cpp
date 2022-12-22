@@ -27,16 +27,17 @@ void TableViewClass::OnCreate(HWND hwndParent, HINSTANCE hInst)
         NULL);
 }
 
-void TableViewClass::ReadFromFile(wstring fileName)
+void TableViewClass::ReadFromFile(wstring FileName)
 {
-    if (fileName != L"")
+    if (FileName != L"")
     {
         table.clear();
 
         wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
 
         ifstream file;
-        file.open(fileName);
+        file.open(FileName);
+        fileName = FileName;
     
         if (file.is_open())
         {
@@ -76,13 +77,15 @@ void TableViewClass::ReadFromFile(wstring fileName)
     }
 }
 
-void TableViewClass::WriteInFile()
+void TableViewClass::WriteInFile(wstring FileName)
 {
     wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
     currentTable[0] = table[0];
 
     fstream file;
-    file.open("Table.txt");
+    if (FileName == L"") file.open(fileName);
+    else file.open(FileName);
+
     for (size_t i = 0; i < currentTable.size(); i++)
     {
         WCHAR line[256];

@@ -16,13 +16,14 @@ class TableViewClass
 private:
 	HWND hWndParent;
 	HWND hWndTable;
+	wstring fileName;
 	pair<int, int> lastSortedColumnAndType = make_pair(0, 1);
 	vector<vector<wstring>> table;
 	vector<vector<wstring>> currentTable;
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
-	void ReadFromFile(wstring fileName);
-	void WriteInFile();
+	void ReadFromFile(wstring FileName);
+	void WriteInFile(wstring = L"");
 	void PrintTable(vector<vector<wstring>> CurrentTable);
 	void PrintHeadings(vector<wstring> headings);
 	void PrintRow(vector<wstring> row, size_t index);
