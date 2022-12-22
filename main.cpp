@@ -21,7 +21,7 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-wstring getFileName(HWND hwnd);
+wstring getFileName(HWND hwnd, wstring action);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -153,13 +153,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (wmId)
             {
             case ID_OPEN:
-                Table.ReadFromFile(getFileName(hWnd));
+                Table.ReadFromFile(getFileName(hWnd, L"Open"));
                 break;
             case ID_SAVE:
                 Table.WriteInFile();
                 break;
             case ID_SAVE_AS:
-                Table.WriteInFile();
+                Table.WriteInFile(getFileName(hWnd, L"Save"));
                 break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
@@ -209,7 +209,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
-wstring getFileName(HWND hwnd)
+wstring getFileName(HWND hwnd, wstring action)
 {
     wchar_t fname[256];
     OPENFILENAME ofn;
@@ -222,9 +222,11 @@ wstring getFileName(HWND hwnd)
     ofn.lpstrFilter = L"Text files (*.txt)\0*.txt\0\0";
     ofn.lpstrDefExt = L"txt";
     ofn.lpstrFile = fname;
-    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
     ofn.nMaxFile = sizeof(fname);
-    if (GetOpenFileName(&ofn))
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+    if (action == L"Open" && GetOpenFileName(&ofn))
+        return fname;
+    if (action == L"Save" && GetSaveFileName(&ofn))
         return fname;
     return L"";
 }

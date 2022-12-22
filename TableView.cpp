@@ -79,27 +79,34 @@ void TableViewClass::ReadFromFile(wstring FileName)
 
 void TableViewClass::WriteInFile(wstring FileName)
 {
-    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
-    currentTable[0] = table[0];
-
-    fstream file;
-    if (FileName == L"") file.open(fileName);
-    else file.open(FileName);
-
-    for (size_t i = 0; i < currentTable.size(); i++)
+    if (FileName != L"")
     {
-        WCHAR line[256];
-        vector<wstring> row = currentTable[i];
+        wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
+        currentTable[0] = table[0];
 
-        row.erase(row.cbegin());
+        ofstream file;
+        if (FileName == L"current") file.open(fileName);
+        else file.open(FileName);
 
-        swprintf_s(line, 256, L"%s", row[0].c_str());
-        for (int j = 1; j < row.size(); j++)
-            swprintf_s(line, 256, L"%s\t%s", line, row[j].c_str());
+        if (file.is_open())
+        {
+            for (size_t i = 0; i < currentTable.size(); i++)
+            {
+                WCHAR line[256];
+                vector<wstring> row = currentTable[i];
 
-        file << convert.to_bytes(line) << endl;
+                row.erase(row.cbegin());
+
+                swprintf_s(line, 256, L"%s", row[0].c_str());
+                for (int j = 1; j < row.size(); j++)
+                    swprintf_s(line, 256, L"%s\t%s", line, row[j].c_str());
+
+                file << convert.to_bytes(line) << endl;
+            }
+            file.close();
+        }
+        
     }
-    file.close();
 }
 
 void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)

@@ -23,7 +23,7 @@ private:
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
 	void ReadFromFile(wstring FileName);
-	void WriteInFile(wstring = L"");
+	void WriteInFile(wstring = L"current");
 	void PrintTable(vector<vector<wstring>> CurrentTable);
 	void PrintHeadings(vector<wstring> headings);
 	void PrintRow(vector<wstring> row, size_t index);
