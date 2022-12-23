@@ -12,7 +12,6 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
-HWND hwndList;
 TableViewClass Table;
 
 // Forward declarations of functions included in this code module:

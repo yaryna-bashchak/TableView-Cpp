@@ -31,6 +31,7 @@ void TableViewClass::ReadFromFile(wstring FileName)
 {
     if (FileName != L"")
     {
+        DeleteFullTable();
         table.clear();
 
         wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
@@ -122,11 +123,13 @@ void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
 
 void TableViewClass::PrintHeadings(vector<wstring> headings)
 {
-    int width = 100;
+    //int width = 150;
 
     for (size_t i = 0; i < headings.size(); i++)
     {
         LVCOLUMN lvc;
+
+        int width = maxWidth(i);
 
         lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
         lvc.fmt = LVCFMT_LEFT;
@@ -216,4 +219,20 @@ void TableViewClass::OnSize()
         GetClientRect(hWndParent, &rc);
         MoveWindow(hWndTable, 0, 0, rc.right - rc.left, rc.bottom - rc.top, FALSE);
     }
+}
+
+int TableViewClass::maxWidth(int iColumn)
+{
+    int MaxLength = currentTable[0][iColumn].length();
+    for (size_t i = 1; i < currentTable.size(); i++)
+    {
+        if (currentTable[i][iColumn].length() > MaxLength)
+            MaxLength = currentTable[i][iColumn].length();
+    }
+
+    int MaxWidth;
+    if (MaxLength < 10) MaxWidth = MaxLength * 12;
+    else MaxWidth = MaxLength * 7;
+
+    return MaxWidth;
 }

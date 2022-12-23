@@ -20,6 +20,7 @@ private:
 	pair<int, int> lastSortedColumnAndType = make_pair(0, 1);
 	vector<vector<wstring>> table;
 	vector<vector<wstring>> currentTable;
+	int maxWidth(int i);
 public:
 	void OnCreate(HWND hwndParent, HINSTANCE hInst);
 	void ReadFromFile(wstring FileName);
