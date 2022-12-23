@@ -1,0 +1,38 @@
+Economic Position	Occupation Type 	Home	Gender	Region	Adults	Children
+Full-time working	Routine or manual	Owned	Male	Scotland	3	1
+Full-time working	Intermediate occupation	Owned	Male	North West and Merseyside	2	1
+Full-time working	Managerial or Professional	Owned	Female	Wales	1	3
+Full-time working	Intermediate occupation	Rented	Male	North West and Merseyside	2	1
+Training Program	Routine or manual	Rented	Female	South East	1	3
+Full-time working	Intermediate occupation	Owned	Male	Wales	1	1
+Economically Inactive	Not Classified	Owned	Female	North West and Merseyside	1	1
+Full-time working	Managerial or Professional	Owned	Male	Wales	4	1
+Economically Inactive	Managerial or Professional	Owned	Female	North West and Merseyside	1	1
+Part-time working	Routine or manual	Rented	Female	North West and Merseyside	1	1
+Part-time working	Routine or manual	Rented	Female	London	1	3
+Full-time working	Managerial or Professional	Owned	Male	Wales	2	2
+Full-time working	Intermediate occupation	Owned	Female	Scotland	2	1
+Part-time working	Routine or manual	Rented	Female	Eastern	2	1
+Full-time working	Intermediate occupation	Owned	Male	East Midlands	2	3
+Full-time working	Routine or manual	Rented	Male	London	2	3
+Economically Inactive	Not Classified	Owned	Female	Wales	1	1
+Part-time working	Routine or manual	Rented	Female	North East	1	2
+Economically Inactive	Not Classified	Owned	Female	London	1	1
+Full-time working	Managerial or Professional	Owned	Female	South East	1	1
+Full-time working	Managerial or Professional	Rented	Male	North West and Merseyside	1	1
+Economically Inactive	Not Classified	Owned	Male	South East	2	1
+Full-time working	Managerial or Professional	Owned	Male	Eastern	2	1
+Economically Inactive	Not Classified	Owned	Female	North West and Merseyside	1	1
+Economically Inactive	Not Classified	Owned	Male	Eastern	1	1
+Full-time working	Managerial or Professional	Owned	Male	South East	1	1
+Full-time working	Managerial or Professional	Owned	Male	South East	1	1
+Training Program	Routine or manual	Owned	Female	Northern Ireland	2	1
+Part-time working	Intermediate occupation	Owned	Female	Eastern	2	1
+Full-time working	Intermediate occupation	Rented	Female	North East	4	1
+Economically Inactive	Managerial or Professional	Owned	Male	Scotland	2	1
+Full-time working	Managerial or Professional	Owned	Male	South West	1	1
+Full-time working	Intermediate occupation	Owned	Male	South East	2	1
+Economically Inactive	Not Classified	Owned	Male	Northern Ireland	1	1
+Economically Inactive	Not Classified	Rented	Female	London	2	1
+Part-time working	Routine or manual	Rented	Female	Yorkshire and the Humber	1	3
+Full-time working	Routine or manual	Rented	Female	Scotland	1	1
