@@ -71,6 +71,7 @@ void TableViewClass::ReadFromFile(wstring FileName)
                 }
             }
             file.close();
+            SetWindowText(hWndParent, (LPCWSTR)fileName.c_str());
         }
 
         currentTable = table;
@@ -87,7 +88,11 @@ void TableViewClass::WriteInFile(wstring FileName)
 
         ofstream file;
         if (FileName == L"current") file.open(fileName);
-        else file.open(FileName);
+        else
+        {
+            fileName = FileName;
+            file.open(FileName);
+        }
 
         if (file.is_open())
         {
@@ -104,6 +109,7 @@ void TableViewClass::WriteInFile(wstring FileName)
 
                 file << convert.to_bytes(line) << endl;
             }
+            SetWindowText(hWndParent, (LPCWSTR)fileName.c_str());
             file.close();
         }
         
