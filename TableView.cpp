@@ -81,7 +81,7 @@ void TableViewClass::ReadFromFile(wstring FileName)
 
 void TableViewClass::WriteInFile(wstring FileName)
 {
-    if (FileName != L"")
+    if (FileName != L"" && !table.empty())
     {
         wstring_convert<codecvt_utf8<wchar_t>, wchar_t> convert;
         currentTable[0] = table[0];
@@ -129,8 +129,6 @@ void TableViewClass::PrintTable(vector<vector<wstring>> CurrentTable)
 
 void TableViewClass::PrintHeadings(vector<wstring> headings)
 {
-    //int width = 150;
-
     for (size_t i = 0; i < headings.size(); i++)
     {
         LVCOLUMN lvc;
